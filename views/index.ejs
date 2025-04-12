@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockchain ePortfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+        --accent-gradient: linear-gradient(135deg, #0099f7 0%, #4b0082 100%);
+        --card-gradient: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.02) 100%
+        );
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background: var(--primary-gradient);
+        color: #ffffff;
+        min-height: 100vh;
+      }
+      .navbar {
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+      }
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .nav-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      .nav-links a:hover {
+        color: #0099f7;
+      }
+      .hero {
+        padding: 6rem 0;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 4rem 0;
+      }
+      .card {
+        background: var(--card-gradient);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: transform 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #0099f7;
+      }
+      .card p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1.5rem;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: var(--accent-gradient);
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: opacity 0.3s ease;
+      }
+      .btn:hover {
+        opacity: 0.9;
+      }
+      footer {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 2rem 0;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 4rem;
+      }
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="logo">Blockchain ePortfolio</a>
+          <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/profile">Profile</a>
+            <a href="/certificates">Certificates</a>
+            <a href="http://127.0.0.1:5000">Plag Checker</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <section class="hero">
+        <h1>Welcome to Blockchain ePortfolio</h1>
+        <p>
+          Secure your professional credentials on the blockchain. Immutable.
+          Verifiable. Future-proof.
+        </p>
+      </section>
+
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Create Your Profile</h3>
+          <p>
+            Build your blockchain identity and manage your professional presence
+            in the decentralized world.
+          </p>
+          <a href="/profile" class="btn">Go to Profile</a>
+        </div>
+        <div class="card">
+          <h3>Manage Certificates</h3>
+          <p>
+            Store and verify your certificates with blockchain technology.
+            Tamper-proof and always accessible.
+          </p>
+          <a href="/certificates" class="btn">Manage Certificates</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>Blockchain ePortfolio &copy; 2025 | Powered by Ethereum</p>
+      </div>
+    </footer>
+  </body>
+</html>

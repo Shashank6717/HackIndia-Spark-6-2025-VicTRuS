@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plagiarism Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 10px; margin-top: 10px; }
+        .results { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; }
+        .analysis-item { margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 5px; }
+        .plagiarism-score { font-size: 24px; font-weight: bold; margin: 20px 0; }
+        .high-risk { color: #d9534f; }
+        .medium-risk { color: #f0ad4e; }
+        .low-risk { color: #5cb85c; }
+        .analysis-detail { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>GitHub Code Plagiarism Analyzer</h1>
+    <form action="/check" method="POST" enctype="multipart/form-data">
+        <label>GitHub File URL:</label><br>
+        <input type="text" name="github_url" placeholder="https://github.com/user/repo/blob/main/file.py" size="60" required><br><br>
+
+        <button type="submit">Analyze for Plagiarism</button>
+    </form>
+
+    {% if analysis is defined %}
+        <div class="results">
+            <h3>Plagiarism Analysis Results</h3>
+            <p>Source: <a href="{{ github_url }}" target="_blank">{{ github_url }}</a></p>
+            
+            <div class="plagiarism-score {% if analysis.score > 70 %}high-risk{% elif analysis.score > 40 %}medium-risk{% else %}low-risk{% endif %}">
+                Plagiarism Probability: {{ analysis.score }}%
+            </div>
+            
+            <h4>Analysis Details:</h4>
+            {% for detail in analysis.details %}
+                <div class="analysis-item">
+                    <p class="analysis-detail"><strong>{{ detail.name }}:</strong> {{ detail.description }}</p>
+                    {% if detail.evidence %}
+                        <p class="analysis-detail"><em>Evidence:</em> "{{ detail.evidence }}"</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <h4>Recommendation:</h4>
+            <p>{{ analysis.recommendation }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>

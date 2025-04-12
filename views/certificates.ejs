@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificates | Blockchain ePortfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">Blockchain ePortfolio</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/certificates">Certificates</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:5000">API</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h3 class="mb-0">Your Certificates</h3>
+            </div>
+            <div class="card-body">
+              <div id="certificates-loading" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Connecting to blockchain...</p>
+              </div>
+
+              <div id="wallet-connect" class="text-center d-none">
+                <p class="lead">
+                  Connect your wallet to view and manage your certificates
+                </p>
+                <button id="connect-wallet" class="btn btn-primary">
+                  Connect Wallet
+                </button>
+              </div>
+
+              <div id="certificates-content" class="d-none">
+                <button id="add-certificate-btn" class="btn btn-primary mb-4">
+                  Add New Certificate
+                </button>
+
+                <div id="certificate-form" class="mb-4 d-none">
+                  <h4 class="mb-3">Add New Certificate</h4>
+                  <form id="add-certificate-form">
+                    <div class="mb-3">
+                      <label for="certificate-name" class="form-label"
+                        >Certificate Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="certificate-name"
+                        name="name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="certificate-issuer" class="form-label"
+                        >Issuing Organization</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="certificate-issuer"
+                        name="issuer"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="certificate-date" class="form-label"
+                        >Issue Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="certificate-date"
+                        name="date"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="certificate-file" class="form-label"
+                        >Certificate File</label
+                      >
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="certificate-file"
+                        name="certificate"
+                        required
+                      />
+                      <div class="form-text">
+                        Upload your certificate file (PDF, JPG, PNG)
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <button
+                        type="button"
+                        id="cancel-certificate"
+                        class="btn btn-secondary"
+                      >
+                        Cancel
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Save Certificate
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <div id="certificates-list">
+                  <h4 class="mb-3">Your Certificates</h4>
+                  <div id="no-certificates" class="alert alert-info d-none">
+                    You haven't added any certificates yet. Click "Add New
+                    Certificate" to get started.
+                  </div>
+                  <div id="certificates-container" class="row"></div>
+                </div>
+              </div>
+
+              <div id="transaction-status" class="alert alert-info mt-3 d-none">
+                <div class="d-flex align-items-center">
+                  <div
+                    class="spinner-border spinner-border-sm me-2"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <div>
+                    <strong>Transaction in progress</strong>
+                    <p class="mb-0 small">
+                      Your certificate is being added to the blockchain. Please
+                      wait...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate View Modal -->
+    <div
+      class="modal fade"
+      id="certificate-modal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-certificate-name">
+              Certificate Name
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-3">
+              <img
+                id="modal-certificate-image"
+                src=""
+                alt="Certificate"
+                class="img-fluid mb-3"
+                style="max-height: 400px"
+              />
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p>
+                  <strong>Issuer:</strong>
+                  <span id="modal-certificate-issuer"></span>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                  <strong>Issue Date:</strong>
+                  <span id="modal-certificate-date"></span>
+                </p>
+              </div>
+            </div>
+            <div class="mt-3">
+              <p>
+                <strong>Blockchain Verification:</strong>
+                <span
+                  id="modal-certificate-verification"
+                  class="badge bg-success"
+                  >Verified on Blockchain</span
+                >
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container text-center">
+        <p>Blockchain ePortfolio &copy; 2025</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/certificates.js"></script>
+  </body>
+</html>

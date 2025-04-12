@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Portfolio | Blockchain ePortfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">Blockchain ePortfolio</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/profile">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/certificates">Certificates</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:5000">API</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h3 class="mb-0">Professional Portfolio</h3>
+            </div>
+            <div class="card-body">
+              <div id="profile-loading" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Connecting to blockchain...</p>
+              </div>
+
+              <div id="wallet-connect" class="text-center d-none">
+                <p class="lead">
+                  Connect your wallet to view and update your portfolio
+                </p>
+                <button id="connect-wallet" class="btn btn-primary">
+                  Connect Wallet
+                </button>
+              </div>
+
+              <div id="profile-form" class="d-none">
+                <form id="update-profile-form">
+                  <div class="row mb-4">
+                    <div class="col-md-12 mb-3">
+                      <h4 class="border-bottom pb-2">Personal Information</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Full Name*</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          name="name"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="title" class="form-label"
+                          >Professional Title*</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="title"
+                          name="title"
+                          placeholder="e.g. Senior Software Engineer"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="email" class="form-label"
+                          >Email Address*</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          name="email"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="phone" class="form-label"
+                          >Phone Number</label
+                        >
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="phone"
+                          name="phone"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label for="location" class="form-label"
+                          >Location</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="location"
+                          name="location"
+                          placeholder="e.g. San Francisco, CA"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label for="bio" class="form-label"
+                          >Professional Summary</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="bio"
+                          name="bio"
+                          rows="4"
+                          placeholder="A brief overview of your professional background and expertise"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-md-12 mb-3">
+                      <h4 class="border-bottom pb-2">Skills & Experience</h4>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label for="skills" class="form-label">Skills</label>
+                        <textarea
+                          class="form-control"
+                          id="skills"
+                          name="skills"
+                          rows="2"
+                          placeholder="e.g. JavaScript, React, Node.js, Blockchain, Solidity"
+                        ></textarea>
+                        <div class="form-text">
+                          Enter your skills separated by commas
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label for="experience" class="form-label"
+                          >Work Experience</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="experience"
+                          name="experience"
+                          rows="4"
+                          placeholder="Summarize your relevant work experience"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label for="education" class="form-label"
+                          >Education</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="education"
+                          name="education"
+                          rows="3"
+                          placeholder="List your educational qualifications"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-md-12 mb-3">
+                      <h4 class="border-bottom pb-2">Online Presence</h4>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="linkedinUrl" class="form-label"
+                          >LinkedIn Profile</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-linkedin"></i
+                          ></span>
+                          <input
+                            type="url"
+                            class="form-control"
+                            id="linkedinUrl"
+                            name="linkedinUrl"
+                            placeholder="https://linkedin.com/in/username"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="githubUrl" class="form-label"
+                          >GitHub Profile</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-github"></i
+                          ></span>
+                          <input
+                            type="url"
+                            class="form-control"
+                            id="githubUrl"
+                            name="githubUrl"
+                            placeholder="https://github.com/username"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="websiteUrl" class="form-label"
+                          >Personal Website</label
+                        >
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><i class="bi bi-globe"></i
+                          ></span>
+                          <input
+                            type="url"
+                            class="form-control"
+                            id="websiteUrl"
+                            name="websiteUrl"
+                            placeholder="https://yourwebsite.com"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                      Save Portfolio
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div id="profile-view" class="d-none">
+                <div class="row mb-4">
+                  <div class="col-md-3 text-center">
+                    <img
+                      id="profile-image"
+                      src="/img/default-profile.png"
+                      alt="Profile Picture"
+                      class="img-fluid rounded-circle mb-3"
+                      style="max-width: 200px"
+                    />
+                    <div class="d-grid gap-2">
+                      <button id="edit-profile" class="btn btn-primary">
+                        Edit Portfolio
+                      </button>
+                      <a href="/certificates" class="btn btn-outline-primary"
+                        >View Certificates</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <h2 id="profile-name" class="mb-1">Name</h2>
+                    <h4 id="profile-title" class="text-muted mb-3">Title</h4>
+
+                    <div class="mb-3">
+                      <p id="profile-bio">Bio</p>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <p>
+                          <i class="bi bi-envelope me-2"></i>
+                          <span id="profile-email">Email</span>
+                        </p>
+                        <p>
+                          <i class="bi bi-telephone me-2"></i>
+                          <span id="profile-phone">Phone</span>
+                        </p>
+                        <p>
+                          <i class="bi bi-geo-alt me-2"></i>
+                          <span id="profile-location">Location</span>
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p id="profile-linkedin-container" class="d-none">
+                          <i class="bi bi-linkedin me-2"></i>
+                          <a id="profile-linkedin" href="#" target="_blank"
+                            >LinkedIn</a
+                          >
+                        </p>
+                        <p id="profile-github-container" class="d-none">
+                          <i class="bi bi-github me-2"></i>
+                          <a id="profile-github" href="#" target="_blank"
+                            >GitHub</a
+                          >
+                        </p>
+                        <p id="profile-website-container" class="d-none">
+                          <i class="bi bi-globe me-2"></i>
+                          <a id="profile-website" href="#" target="_blank"
+                            >Website</a
+                          >
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <h5>Skills</h5>
+                      <div id="profile-skills-container" class="mb-3"></div>
+                    </div>
+
+                    <div class="mb-3">
+                      <h5>Work Experience</h5>
+                      <div id="profile-experience" class="mb-3"></div>
+                    </div>
+
+                    <div class="mb-3">
+                      <h5>Education</h5>
+                      <div id="profile-education"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="transaction-status" class="alert alert-info mt-3 d-none">
+                <div class="d-flex align-items-center">
+                  <div
+                    class="spinner-border spinner-border-sm me-2"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <div>
+                    <strong>Transaction in progress</strong>
+                    <p class="mb-0 small">
+                      Your portfolio is being updated on the blockchain. Please
+                      wait...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container text-center">
+        <p>Blockchain ePortfolio &copy; 2025</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/profile.js"></script>
+  </body>
+</html>
